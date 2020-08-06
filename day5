@@ -1,0 +1,84 @@
+    1  cd /aws/
+    2  tree
+    3  cat cloud_labs/ansible/01launch_rhel_instances.yml 
+    4  ansible-playbook cloud_labs/ansible/01launch_rhel_instances.yml -e myclass=/8am
+    5  cd /8am/
+    6  tree
+    7  rm -rf day4 
+    8  tree
+    9  rm -rf mod 
+   10  tree
+   11  git status
+   12  cat file1 
+   13  rm -rf file1 
+   14  tree
+   15  pwd
+   16  tree
+   17  ansible all -m ping
+   18  vim /etc/ansible/ansible.cfg 
+   19  ansible all -m shell -a "ls -l /tmp/"
+   20  ansible all -m file -a "path=/tmp/common state=directory"
+   21  ansible all -m shell -a "ls -l /tmp/"
+   22  ansible all -m shell -a "ls -l /tmp/common"
+   23  ansible all -m file -a "path=/tmp/common/info state=touch"
+   24  ansible all -m shell -a "ls -l /tmp/common"
+   25  ansible-doc copy
+   26  ls
+   27  touch file1
+   28  touch file2
+   29  ls
+   30  vi file1 
+   31  ansible all -m copy -a "src=file1 dest=/tmp/common"
+   32  ansible all -m shell -a "ls -l /tmp/common"
+   33  ansible all -m shell -a "cat /tmp/common/file1"
+   34  rm -rf file1 
+   35  rm -rf file2
+   36  tree
+   37  ansible-doc fetch
+   38  ansible all -m fetch -a "src=/tmp/common/info dest=backup"
+   39  ls
+   40  tree
+   41  ansible all -m fetch -a "src=/tmp/common/info dest=backup"
+   42  cat inventory/rhel 
+   43  ssh -i secrets/rhel.pem ec2-user@3.6.86.177
+   44  ansible all -m fetch -a "src=/tmp/common/info dest=backup"
+   45  ansible-doc blockinfile
+   46  tree
+   47  ansible-doc -l } wc -l
+   48  ansible-doc -l | wc -l
+   49  ls
+   50  tree
+   51  rm -rf backup/
+   52  tree
+   53  mkdir playbooks
+   54  tree
+   55  pwd
+   56  vim playbooks/01create_dir_file.yml
+   57  rm -rf ~/.vimrc 
+   58  vim playbooks/01create_dir_file.yml
+   59  vim ~/.vimrc
+   60  vi test
+   61  vim test.yml
+   62  vim playbooks/01create_dir_file.yml
+   63  tree
+   64  ansible-playbook --syntax-check playbooks/01create_dir_file.yml 
+   65  vim playbooks/01create_dir_file.yml
+   66  ansible-playbook --syntax-check playbooks/01create_dir_file.yml 
+   67  vim playbooks/01create_dir_file.yml
+   68  ansible-playbook --syntax-check playbooks/01create_dir_file.yml 
+   69  vim playbooks/01create_dir_file.yml
+   70  ansible-playbook --syntax-check playbooks/01create_dir_file.yml 
+   71  vim playbooks/01create_dir_file.yml
+   72  ansible-playbook --syntax-check playbooks/01create_dir_file.yml 
+   73  vim playbooks/01create_dir_file.yml
+   74  ansible-playbook --syntax-check playbooks/01create_dir_file.yml 
+   75  ansible-playbook -C playbooks/01create_dir_file.yml 
+   76* 
+   77  ansible-playbook playbooks/01create_dir_file.yml 
+   78  vim playbooks/01create_dir_file.yml
+   79  tree
+   80  cat test 
+   81  rm -rf test 
+   82  tree
+   83  history 
+   84  history > day5

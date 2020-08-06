@@ -1,0 +1,15 @@
+---
+ - name: create directory file in mumbai datacenter
+   hosts: all
+   tasks:
+    
+    - name: create a directory
+      file:
+       path: /jerrish
+       state: directory
+
+    - name: copy a file
+      copy:
+       src: /8am/inventory/rhel
+       dest: /jerrish 
+...
