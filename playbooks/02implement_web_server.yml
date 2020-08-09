@@ -1,0 +1,36 @@
+---
+ - name: implement apache web server in mumbai dc rhel server
+   hosts: rhel
+   tasks:
+
+   #This is my 1st task
+    - name: install apache software
+      dnf:
+        name: httpd
+        state: present
+
+    - name: start and enable apache service
+      service:
+        name: httpd
+        enabled: yes
+        state: started
+
+    - name: install firewalld software
+      dnf:
+        name: firewalld
+        state: present
+
+    - name: start and enable firewalld service
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+
+    - name: allow http traffic via firewalld
+      firewalld:
+        service: http
+        state: enabled
+        immediate: yes
+        permanent: yes
+ 
+...
