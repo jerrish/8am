@@ -1,0 +1,10 @@
+---
+ - name: Managing users in mumbai dc
+   hosts: rhel
+   tasks:
+    
+    - name: ensure '{{user}}' is '{{state}}'
+      user:
+        name: '{{user}}'
+        state: '{{state}}'
+...
