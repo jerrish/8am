@@ -1,5 +1,5 @@
 ---
- - name: copy site1 to rhel1
+ - name: copy site1 to rhel server1
    hosts: ec2-13-126-236-181.ap-south-1.compute.amazonaws.com
    tasks:
     
@@ -8,7 +8,7 @@
         src: ../files/site1
         dest: /var/www/html
  
- - name: copy site2 to rhel2
+ - name: copy site2 to rhel server2
    hosts: 35.154.241.162
    tasks:
     
@@ -16,3 +16,4 @@
       copy:
         src: ../files/site2
         dest: /var/www/html
+...

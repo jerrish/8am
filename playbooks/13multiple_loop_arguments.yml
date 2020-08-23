@@ -1,0 +1,21 @@
+---
+ - name: create users in mumbai servers
+   hosts: rhel
+   gather_facts: no
+   tasks:
+    
+    - name: create user1
+      user:
+        name: '{{item.username}}'
+        shell: '{{item.shell}}'
+        groups: '{{item.groups}}'
+        state: present
+      loop:
+        - username: user11
+          shell: /bin/csh
+          groups: wheel
+
+        - username: user12
+          shell: /bin/bash
+          groups: wheel
+...

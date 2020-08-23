@@ -1,0 +1,26 @@
+---
+ - name: create users in mumbai servers
+   hosts: all
+   tasks:
+    
+    - name: create user
+      user:
+        name: '{{item.username}}'
+        shell: '{{item.shell}}'
+        groups: '{{item.groups}}'
+        state: present
+      when: ansible_distribution == "RedHat"
+      loop:
+        - username: user11
+          shell: /bin/csh
+          groups: wheel
+
+        - username: user12
+          shell: /bin/bash
+          groups: wheel
+
+    - name: create user
+      user:
+        name: user100
+        state: present
+      when: ansible_distribution == "Ubuntu"

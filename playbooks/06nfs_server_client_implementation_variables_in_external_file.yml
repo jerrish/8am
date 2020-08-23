@@ -1,6 +1,8 @@
 ---
  - name: nfs server
-   hosts: ec2-52-66-196-127.ap-south-1.compute.amazonaws.com
+   hosts: '{{nfs_server}}'
+   vars_files: 
+    - ../vars/nfs_vars.yml
    tasks:
     
     - name: install software
@@ -16,13 +18,13 @@
 
     - name: create a share dir
       file:
-        path: /share1
+        path: '{{share_name}}'
         state: directory
 
     - name: manage configuration
       lineinfile:
         path: /etc/exports
-        line: '/share1   ec2-13-232-108-14.ap-south-1.compute.amazonaws.com(ro)'
+        line: '{{share_name}}   {{nfs_client}}{{perm}}'
         state: present
 
     - name: update
@@ -30,7 +32,9 @@
         cmd: exportfs -r
 
  - name: nfs client
-   hosts: ec2-13-232-108-14.ap-south-1.compute.amazonaws.com
+   hosts: '{{nfs_client}}'
+   vars_files:
+    - ../vars/nfs_vars.yml
    tasks:
     
     - name: install software
@@ -40,8 +44,8 @@
 
     - name: mount the share
       mount:
-        src: ec2-52-66-196-127.ap-south-1.compute.amazonaws.com:/share1
-        path: /local1
+        src: '{{nfs_server}}:{{share_name}}'
+        path: '{{mount_point}}'
         state: mounted
         fstype: nfs
-
+...

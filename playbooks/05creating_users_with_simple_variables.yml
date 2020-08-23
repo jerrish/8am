@@ -1,0 +1,17 @@
+---
+ - name: creating users in mumbai dc rhel servers
+   hosts: rhel
+   vars:
+    user: user1
+    password: $1$jilaijD2$iaWIH1itfNIQjtkqA.8Rl1 # echo password | openssl passwd -1 --stdin is used to generate hashed password
+    state: present
+    group: wheel
+   tasks:
+    
+    - name: ensure '{{user}}' is '{{state}}'
+      user:
+        name: '{{user}}'
+        password: '{{password}}'
+        state: '{{state}}'
+        groups: '{{group}}'
+...

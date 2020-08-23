@@ -1,0 +1,17 @@
+---
+ - name: custom facts in managed node
+   hosts: ec2-13-234-48-217.ap-south-1.compute.amazonaws.com,ec2-13-234-59-192.ap-south-1.compute.amazonaws.com
+   gather_facts: no
+   tasks:
+    
+    - name: create a directory
+      file:
+        path: /etc/ansible/facts.d
+        state: directory
+        recurse: yes
+
+    - name: copy the custom fact
+      copy:
+       src: ../files/test.fact
+       dest: /etc/ansible/facts.d
+...

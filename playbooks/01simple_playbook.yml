@@ -1,0 +1,10 @@
+---
+ - name: create directory in mumbai dc rhel servers
+   hosts: all
+   tasks:
+    
+    - name: create a directory
+      file:
+       path: /common
+       state: directory
+...

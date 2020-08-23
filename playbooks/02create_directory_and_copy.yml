@@ -1,15 +1,15 @@
 ---
- - name: create directory file in mumbai datacenter
+ - name: create directory and copy file to mumbai dc rhel servers
    hosts: all
    tasks:
     
     - name: create a directory
       file:
-       path: /jerrish
+       path: /common
        state: directory
 
     - name: copy a file
       copy:
-       src: /8am/inventory/rhel
-       dest: /jerrish 
+       src: ../files/file1
+       dest: /common
 ...

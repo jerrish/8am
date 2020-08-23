@@ -1,0 +1,13 @@
+---
+ - name: example playbook for registered variable
+   hosts: all
+   tasks:
+    
+    - name: execute a shell cmd
+      shell:
+        cmd: lsblk
+      register: block_out
+
+    - name: capture
+      debug:
+        var: block_out

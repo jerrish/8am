@@ -1,0 +1,13 @@
+---
+ - name: create users in mumbai servers
+   hosts: all
+   gather_facts: no
+   vars_files: ../vars/listofusers.yml
+   tasks:
+    
+    - name: create users
+      user:
+        name: '{{item}}'
+        state: present
+      loop: '{{users}}'
+...

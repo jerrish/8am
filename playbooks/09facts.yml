@@ -1,0 +1,10 @@
+---
+ - name: demo on gathering facts
+   hosts: all
+   gather_facts: no
+   tasks:
+
+    - name: capture the variables
+      debug:
+        var: ansible_facts
+...

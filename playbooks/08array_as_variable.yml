@@ -1,0 +1,27 @@
+---
+ - name: managing users in mumbai dc
+   hosts: rhel
+   vars:
+    user1:
+      name: user1
+      shell: /bin/bash
+    user2:
+      name: user2
+      shell: /bin/csh
+    state: present
+   tasks:
+    
+    - name: ensure '{{user1.name}}' is '{{state}}'
+      user:
+        name: '{{user1.name}}'
+        password: $1$jilaijD2$iaWIH1itfNIQjtkqA.8Rl1
+        shell: '{{user1.shell}}'
+        state: '{{state}}'
+    
+    - name: ensure "{{user2['name']}}" is '{{state}}'
+      user:
+        name: "{{user2['name']}}"
+        password: $1$jilaijD2$iaWIH1itfNIQjtkqA.8Rl1
+        state: '{{state}}'
+ 
+...
