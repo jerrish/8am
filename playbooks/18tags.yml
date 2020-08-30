@@ -1,0 +1,57 @@
+---
+ - name: implement apache web server in mumbai dc rhel servers
+   hosts: ec2-13-233-238-151.ap-south-1.compute.amazonaws.com
+   gather_facts: no
+   ignore_errors: yes
+   tasks:
+
+    - name: install apache software
+      dnf:
+        name: httpd
+        state: present
+
+    - name: start and enable apache service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: demo task
+      dnf:
+        name: nopkg
+        state: present
+      tags: test10
+
+    - name: install firewalld software
+      dnf:
+        name: firewalld
+        state: present
+      tags:
+        - test1
+        - test2
+
+    - name: error task
+      dnf:
+        name: nopkg
+        state: present
+
+
+    - name: start and enable firewalld service
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+      tags: 
+        - test1
+        - test3
+
+    - name: allow http traffic via firewalld
+      firewalld:
+        service: https
+        state: enabled
+        immediate: yes
+        permanent: yes
+      tags: 
+        - test1
+        - test2
+...

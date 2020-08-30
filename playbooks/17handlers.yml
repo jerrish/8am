@@ -1,0 +1,54 @@
+---
+ - name: nfs server
+   hosts: '{{nfs_server}}'
+   vars_files: 
+    - ../vars/nfs_vars.yml
+   tasks:
+    
+    - name: install software
+      dnf:
+        name: nfs-utils
+        state: present
+
+    - name: start and enable service
+      service:
+        name: nfs-server
+        state: started
+        enabled: yes
+
+    - name: create a share dir
+      file:
+        path: '{{share_name}}'
+        state: directory
+
+    - name: manage configuration
+      lineinfile:
+        path: /etc/exports
+        line: '{{share_name}}   {{nfs_client}}{{perm}}'
+        state: present
+      notify: update
+
+   handlers:
+
+    - name: update
+      shell:
+        cmd: exportfs -r
+
+ - name: nfs client
+   hosts: '{{nfs_client}}'
+   vars_files:
+    - ../vars/nfs_vars.yml
+   tasks:
+    
+    - name: install software
+      dnf: 
+        name: nfs-utils
+        state: present
+
+    - name: mount the share
+      mount:
+        src: '{{nfs_server}}:{{share_name}}'
+        path: '{{mount_point}}'
+        state: mounted
+        fstype: nfs
+...

@@ -1,0 +1,17 @@
+---
+ - name: testing conditions
+   hosts: rhel
+   tasks:
+    
+    - name: install apache software
+      dnf:
+        name: nginx
+        state: present
+      when: ansible_distribution == "RedHat" and ansible_memfree_mb > 200 
+
+    - name: install apache software
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+      when: ansible_distribution == "Ubuntu"

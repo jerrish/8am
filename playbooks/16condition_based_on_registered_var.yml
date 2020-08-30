@@ -1,0 +1,16 @@
+---
+ - name: create user
+   hosts: all
+   tasks:
+    
+    - name: create user
+      user:
+        name: user2
+        state: present
+      register: jerrish
+
+    - name: restart service
+      service:
+        name: sshd
+        state: restarted
+      when: jerrish.changed == true
